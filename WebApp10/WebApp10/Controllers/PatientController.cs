@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using WebApp10.Services;
 using WebApp10.Models;
 
-
 namespace WebApp10.Controllers
 {
     [ApiController]
@@ -18,8 +17,13 @@ namespace WebApp10.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPatient(Patient patient)
+        public async Task<IActionResult> AddPatient([FromBody] Patient patient)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var createdPatient = await _patientService.AddPatientAsync(patient);
             return CreatedAtAction(nameof(GetPatient), new { id = createdPatient.IdPatient }, createdPatient);
         }

@@ -7,6 +7,7 @@ namespace WebApp10.Services
     {
         Task<Patient> AddPatientAsync(Patient patient);
         Task<Patient> GetPatientAsync(int id);
-        // other methods...
     }
+
+    
 }
